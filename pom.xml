@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  	<modelVersion>4.0.0</modelVersion>
+  	<groupId>io.github.mariazevedo88</groupId>
+  	<artifactId>goldgem</artifactId>
+  	<version>1.0.1</version>
+  
+  	<name>goldgem</name>
+  	<description>Simple framework that implements some basic design patterns for Java projects using MVC</description>
+  
+  	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
+  	</licenses>
+  
+  	<developers>
+        <developer>
+          <name>Mariana Azevedo</name>
+          <email>mariana@bsi.ufla.br</email>
+          <timezone>UTC-03:00</timezone>
+        </developer>
+  	</developers>
+  
+  	<properties>
+  	
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <mysql.connector.version>8.0.31</mysql.connector.version>
+        <hibernate.version>5.6.12.Final</hibernate.version>
+        <log4j.version>1.2.17</log4j.version>
+        <joda.time.version>2.11.2</joda.time.version>
+        <junit.jupiter.version>5.4.0</junit.jupiter.version>
+        <compiler.plugin.version>3.6.1</compiler.plugin.version>
+        <surefire.plugin.version>2.22.0</surefire.plugin.version>
+        <coveralls.version>4.3.0</coveralls.version>
+        <jacoco.version>0.7.9</jacoco.version>
+		
+  	</properties>
+  
+  	<dependencies>
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql.connector.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		    <version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>joda-time</groupId>
+		    <artifactId>joda-time</artifactId>
+		    <version>${joda.time.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>${junit.jupiter.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-engine</artifactId>
+		    <version>${junit.jupiter.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-params</artifactId>
+		    <version>${junit.jupiter.version}</version>
+		    <scope>test</scope>
+		</dependency>
+   	</dependencies>
+
+   	<build>
+  		<finalName>goldgem</finalName>
+    	<plugins>
+			<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-compiler-plugin</artifactId>
+            	<version>${compiler.plugin.version}</version>
+           		<configuration>
+                	<source>${java.version}</source>
+                	<target>${java.version}</target>
+            	</configuration>
+        	</plugin>
+        	<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.plugin.version}</version>
+			</plugin>
+        	<plugin>
+			    <groupId>org.eluder.coveralls</groupId>
+			    <artifactId>coveralls-maven-plugin</artifactId>
+			    <version>${coveralls.version}</version>
+			    <configuration>
+			        <repoToken>${env.REPO_TOKEN}</repoToken>
+			    </configuration>
+			</plugin>
+        	<plugin>
+			    <groupId>org.jacoco</groupId>
+			    <artifactId>jacoco-maven-plugin</artifactId>
+			    <version>${jacoco.version}</version>
+			    <configuration>
+			    	<scope>test</scope>
+			    </configuration>
+			    <executions>
+			        <execution>
+		                <id>prepare-agent</id>
+			            <goals>
+			                <goal>prepare-agent</goal>
+			            </goals>
+			        </execution>
+			        <execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+			        <execution>
+					    <id>jacoco-check</id>
+					    <goals>
+					        <goal>check</goal>
+					    </goals>
+					    <configuration>
+					        <rules>
+					            <rule>
+					                <element>PACKAGE</element>
+					                <limits>
+					                    <limit>
+					                        <counter>LINE</counter>
+					                        <value>COVEREDRATIO</value>
+					                        <minimum>0.25</minimum>
+					                    </limit>
+					                </limits>
+					            </rule>
+					        </rules>
+					    </configuration>
+					</execution>
+			    </executions>
+			</plugin>
+    	</plugins>
+  	</build>
+  	
+</project>
