@@ -1,0 +1,3 @@
+[submodule "pipeline-example"]
+	path = pipeline-example
+	url = https://github.com/jenkinsci/pipeline-examples.git
